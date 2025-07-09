@@ -1,10 +1,11 @@
+import sys
 import os
-from dotenv import load_dotenv
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+import os
 from smolagents import CodeAgent
 from smolagents import LiteLLMModel
-from langchain_tavily import TavilySearch
 from src.tools.web_search import tavily_search
-from src.tools.local_store_tool import receipt_query
 try:
     # load environment variables from .env file (requires `python-dotenv`)
     from dotenv import load_dotenv

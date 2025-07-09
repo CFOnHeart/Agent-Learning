@@ -1,11 +1,14 @@
 import sqlite3
 from smolagents import tool
 
+SQLITE_DB_PATH = '/receipts.db'
+
+print("SQLITE_DB_PATH: ", SQLITE_DB_PATH)
 # before using the receipt_query tool, you need to create the receipts table and insert data into it.
 def create_receipts_table():
     print ("Creating receipts table and inserting prepared data...")
     # Connect to SQLite database (or create it if it doesn't exist)
-    conn = sqlite3.connect('receipts.db')
+    conn = sqlite3.connect(SQLITE_DB_PATH)
 
     # Create a cursor object
     cursor = conn.cursor()
@@ -58,7 +61,7 @@ def create_receipts_table():
 def receipt_query(query: str) -> str:
     """
     Help me user to query the receipt information from the local SQLite database.
-    The table named `receipts` contains the following columns:
+    The table named `receipts` with the following schema:
     - receipt_id INTEGER PRIMARY KEY,
     - customer_name TEXT(16),
     - price REAL,
@@ -66,17 +69,17 @@ def receipt_query(query: str) -> str:
     Please the query in SQL format, e.g., "SELECT * FROM receipts WHERE customer_name = 'Alice'".
 
     Args:
-        query: The sqlite query
+        query: The query to perform. This should be correct SQL
 
     Returns:
         Search results of receipts
     """
     # Connect to SQLite database (or create it if it doesn't exist)
     import os
-    if not os.path.exists('receipts.db'):
+    if not os.path.exists(SQLITE_DB_PATH):
         create_receipts_table()
 
-    conn = sqlite3.connect('receipts.db')
+    conn = sqlite3.connect(SQLITE_DB_PATH)
 
     # Create a cursor object
     cursor = conn.cursor()

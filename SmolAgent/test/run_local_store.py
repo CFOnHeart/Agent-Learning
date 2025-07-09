@@ -1,7 +1,13 @@
+import sys
 import os
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
 from smolagents import CodeAgent
 from smolagents import LiteLLMModel
 from src.tools.local_store_tool import receipt_query
+from rich.console import Console
+
+console = Console()
 try:
     # load environment variables from .env file (requires `python-dotenv`)
     from dotenv import load_dotenv
