@@ -1,0 +1,14 @@
+[project]
+name = "smolagents-test"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "azure-identity>=1.23.0",
+    "langchain-community>=0.3.27",
+    "langchain-tavily>=0.2.7",
+    "langchain[openai]>=0.3.26",
+    "smolagents[litellm,toolkit]>=1.19.0",
+    "tavily-python>=0.7.9",
+]
