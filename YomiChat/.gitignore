@@ -1,0 +1,38 @@
+# === General ===
+.DS_Store
+Thumbs.db
+
+# === Python (backend/) ===
+__pycache__/
+*.py[cod]
+*.log
+*.sqlite3
+*.db
+venv/
+env/
+ENV/
+*.env
+.idea/
+.mypy_cache/
+.pytest_cache/
+*.egg-info/
+coverage/
+
+# === FastAPI/Uvicorn ===
+*.pid
+
+# === React (frontend/) ===
+node_modules/
+dist/
+build/
+.env
+*.log
+
+# === VSCode & Editor Configs ===
+.vscode/
+*.swp
+*.swo
+
+# === OS-specific ===
+*.bak
+*~
