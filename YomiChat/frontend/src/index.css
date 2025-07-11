@@ -153,3 +153,35 @@ button:disabled {
     transform: translateY(0);
   }
 }
+
+/* Loading message styles */
+.loading-bubble {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #ffffff !important;
+  border: 1px solid #e1e8ed !important;
+  border-bottom-left-radius: 4px !important;
+}
+
+.loading-text {
+  color: #666;
+  font-style: italic;
+  font-size: 0.9em;
+  margin: 0;
+}
+
+.loading-spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid #f3f3f3;
+  border-top: 2px solid #ff4d7e;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  flex-shrink: 0;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}

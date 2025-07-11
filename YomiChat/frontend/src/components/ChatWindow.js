@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import Message from './Message';
+import LoadingMessage from './LoadingMessage';
 import userAvatar from '../images/avatar.png';
 import agentAvatar from '../images/avatar.png';
 
@@ -12,10 +13,10 @@ export default function ChatWindow() {
   // 自动滚到底
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
-  }, [messages]);
+  }, [messages, loading]);
 
   async function handleSend() {
-    if (!input.trim()) return;
+    if (!input.trim() || loading) return;
     const userMsg = { from: 'user', avatar: userAvatar, content: input };
     setMessages(m => [...m, userMsg]);
     setInput('');
@@ -32,8 +33,18 @@ export default function ChatWindow() {
       setMessages(m => [...m, agentMsg]);
     } catch (e) {
       console.error(e);
+      // 添加错误处理消息
+      const errorMsg = { from: 'agent', avatar: agentAvatar, content: 'Sorry, something went wrong. Please try again.' };
+      setMessages(m => [...m, errorMsg]);
     } finally {
       setLoading(false);
+    }
+  }
+
+  function handleKeyPress(e) {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      handleSend();
     }
   }
 
@@ -42,13 +53,15 @@ export default function ChatWindow() {
       <div className="header">智能体聊天</div>
       <div className="messages">
         {messages.map((m, i) => <Message key={i} {...m} />)}
+        {loading && <LoadingMessage avatar={agentAvatar} />}
         <div ref={bottomRef} />
       </div>
       <div className="input-area">
         <textarea
           value={input}
           onChange={e => setInput(e.target.value)}
-          placeholder="输入你的问题，支持多行…"
+          onKeyPress={handleKeyPress}
+          placeholder="输入你的问题，支持多行…（Enter发送，Shift+Enter换行）"
         />
         <button onClick={handleSend} disabled={loading}>
           {loading ? '思考中…' : '发送'}
