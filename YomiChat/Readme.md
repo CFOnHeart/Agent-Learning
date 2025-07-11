@@ -31,11 +31,15 @@
 
 ```bash
 cd backend
-pip install -r requirements.txt
+uv venv # only first time you need to execute
+.venv\Scripts\activate
+uv sync # install the package specified in pyproject.toml
 ```
 
 #### ▶️ 启动服务
-uvicorn main:app --reload --port 8000
+```bash
+uv run main.py
+```
 
 ### 🔜 前端 React
 #### ✅ 安装依赖

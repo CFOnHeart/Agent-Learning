@@ -1,0 +1,13 @@
+[project]
+name = "backend"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "azure-identity>=1.23.0",
+    "fastapi>=0.116.0",
+    "smolagents[litellm,toolkit]>=1.19.0",
+    "tavily-python>=0.7.9",
+    "uvicorn[standard]>=0.35.0",
+]

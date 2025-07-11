@@ -26,4 +26,17 @@ async def chat_endpoint(req: ChatRequest):
     reply = chat_with_agent(req.message)
     return ChatResponse(reply=reply)
 
-# 启动: uvicorn backend.main:app --reload --port 8000
+# 启动服务器
+if __name__ == "__main__":
+    try:
+        import uvicorn
+        uvicorn.run(
+            "main:app",
+            host="127.0.0.1",
+            port=8000,
+            reload=True,
+            log_level="info"
+        )
+    except ImportError:
+        print("uvicorn not found. Please install it with: pip install uvicorn[standard]")
+        print("Or run manually with: uvicorn main:app --reload --port 8000")
