@@ -2,7 +2,7 @@ from fastapi import FastAPI, HTTPException
 from fastapi.responses import StreamingResponse
 from pydantic import BaseModel
 from fastapi.middleware.cors import CORSMiddleware
-from agent_wrapper import chat_with_agent, chat_with_agent_stream
+from agents import chat_agent
 import json
 
 app = FastAPI()
@@ -25,7 +25,7 @@ class ChatResponse(BaseModel):
 async def chat_endpoint(req: ChatRequest):
     if not req.message.strip():
         raise HTTPException(400, "Empty message")
-    reply = chat_with_agent(req.message)
+    reply = chat_agent.chat(req.message)
     return ChatResponse(reply=reply)
 
 @app.post("/chat/stream")
@@ -34,12 +34,12 @@ async def chat_stream_endpoint(req: ChatRequest):
         raise HTTPException(400, "Empty message")
     
     def generate():
-        for chunk in chat_with_agent_stream(req.message):
-            # 发送Server-Sent Events格式
+        for chunk in chat_agent.chat_stream(req.message):
+            # Send Server-Sent Events format
             data = json.dumps({"content": chunk, "type": "chunk"})
             yield f"data: {data}\n\n"
         
-        # 发送结束信号
+        # Send end signal
         end_data = json.dumps({"content": "", "type": "end"})
         yield f"data: {end_data}\n\n"
     
