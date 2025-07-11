@@ -185,3 +185,93 @@ button:disabled {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
+
+/* Streaming message styles */
+.streaming-content {
+  display: inline-block;
+  position: relative;
+}
+
+.streaming-cursor {
+  display: inline-block;
+  width: 2px;
+  height: 1.2em;
+  background-color: #ff4d7e;
+  margin-left: 2px;
+  animation: blink 1s infinite;
+  vertical-align: text-bottom;
+}
+
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+/* Enhanced message formatting for agent steps */
+.bubble p code {
+  background: rgba(0, 0, 0, 0.1);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-family: 'Consolas', 'Monaco', monospace;
+  font-size: 0.9em;
+}
+
+.message-row.user .bubble p code {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* Special styling for agent status messages */
+.bubble p:has(🚀)::before {
+  content: "";
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  background: #4CAF50;
+  border-radius: 50%;
+  margin-right: 8px;
+}
+
+.bubble p:has(🤔)::before {
+  content: "";
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  background: #2196F3;
+  border-radius: 50%;
+  margin-right: 8px;
+}
+
+.bubble p:has(🔧)::before {
+  content: "";
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  background: #FF9800;
+  border-radius: 50%;
+  margin-right: 8px;
+}
+
+.bubble p:has(✅)::before {
+  content: "";
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  background: #4CAF50;
+  border-radius: 50%;
+  margin-right: 8px;
+}
+
+/* Improve readability for long agent outputs */
+.bubble pre {
+  background: rgba(0, 0, 0, 0.05);
+  padding: 12px;
+  border-radius: 8px;
+  overflow-x: auto;
+  margin: 8px 0;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+.message-row.user .bubble pre {
+  background: rgba(255, 255, 255, 0.1);
+}
