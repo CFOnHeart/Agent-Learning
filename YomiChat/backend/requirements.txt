@@ -1,8 +1,0 @@
-fastapi
-uvicorn[standard]
-python-dotenv
-smolagents
-smoltools-jinaai
-duckduckgo-search
-liteLLM
-requests
